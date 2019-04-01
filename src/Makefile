@@ -14,18 +14,19 @@ DSL= dsl/monte_carlo -n 2000 -s 1729 -v False| dsl/brooks2
 
 ok:; @bash $(Etc)/lua2bin
 
-eg20:  ok; @$(hi); $(DSL) 
-eg0:  ok; @$(hi); $(DSL) | dom | bestrest | super | rank
-eg0a: ok; @$(hi); $(DSL) | dom | bestrest | super
-eg0b: ok; @$(hi); $(DSL) 
-eg1:  ok; @$(hi); cat $(Test)/data/weather.csv | dom
-eg2:  ok; @$(hi); $(Auto) | dom | $(some); $(Auto) | head -1 | $(some)
-eg2a: ok; @$(hi); $(Auto) | dom 
-eg3:  ok; @$(hi); $(Auto) | dom | bestrest
-eg4:  ok; @$(hi); $(Auto) | dom | bestrest | super
-eg5:  ok; @$(hi); $(Auto) | dom | bestrest | super | rank
-eg6:  ok; @$(hi); $(Auto10) | dom | bestrest | super | rank
-eg7:  ok; @$(hi); $(Auto1M) | dom | bestrest | super | rank
+eg20:   ok; @$(hi); $(DSL) 
+eg0:    ok; @$(hi); $(DSL) | dom | bestrest | super | rank
+eg0a:   ok; @$(hi); $(DSL) | dom | bestrest | super
+eg0b:   ok; @$(hi); $(DSL) 
+eg1:    ok; @$(hi); cat $(Test)/data/weather.csv | dom
+my_eg1: ok; @$(hi); cat $(Test)/data/weather.csv | ./my_dom
+eg2:    ok; @$(hi); $(Auto) | dom | $(some); $(Auto) | head -1 | $(some)
+eg2a:   ok; @$(hi); $(Auto) | dom 
+eg3:    ok; @$(hi); $(Auto) | dom | bestrest
+eg4:    ok; @$(hi); $(Auto) | dom | bestrest | super
+eg5:    ok; @$(hi); $(Auto) | dom | bestrest | super | rank
+eg6:    ok; @$(hi); $(Auto10) | dom | bestrest | super | rank
+eg7:    ok; @$(hi); $(Auto1M) | dom | bestrest | super | rank
 
 eg10:
 	@$(MAKE) eg2a |  ./2d  weightSorted 4 weight 4

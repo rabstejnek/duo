@@ -1,0 +1,8 @@
+#!/usr/bin/env python3
+
+def dom(samples=100):
+    print("Hello World!")
+
+# Everything in this if block is ran
+if __name__=="__main__":
+    dom()
