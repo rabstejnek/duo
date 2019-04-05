@@ -1,8 +1,88 @@
 #!/usr/bin/env python3
 
-def dom(samples=100):
-    print("Hello World!")
+'''
+Command object for dom algorithm.
+'''
+class DomCommand:
+    
+    '''
+    Initializes dom command object.
+    '''
+    def __init__(self):
+        self.sample_size = 100
 
-# Everything in this if block is ran
-if __name__=="__main__":
-    dom()
+    '''
+    Executes dom algorithm on given table.
+    '''
+    def execute(self,table):
+        # TODO
+        return table
+
+'''
+Factory for creating our Command objects.
+'''
+class CommandFactory:
+    
+    '''
+    Creates Command based on a type string.
+    '''
+    def createCommand(self,type):
+        if type == "dom":
+            return DomCommand()
+        else:
+            return None
+
+'''
+A weighted variable to be used in dom calculation.
+'''
+class DependentVariable:
+    
+    def __init__(self, weight):
+        self.weight = weight
+
+'''
+An unweighted variable not to be used in dom calculation.
+'''
+class IndependentVariable:
+    
+    def __init__(self):
+        self.weight = 0
+
+'''
+Factory that creates variables.
+'''
+class VariableFactory:
+    
+    '''
+    Creates variable based on column name.
+    '''
+    def createVariable(self,column):
+        if column.startswith(">"):
+            return DependentVariable(1)
+        elif column.startswith("<"):
+            return DependentVariable(-1)
+        else:
+            return IndependentVariable()
+
+'''
+Prints a table in CSV format.
+'''
+def printCSV(table):
+    # print out table in csv format
+    print("")
+
+
+
+
+if __name__ == "__main__":
+    # TODO read in csv into table
+    table = None
+    
+    # Create a dom command and execute it on the table.
+    commandFactory = CommandFactory()
+    dom = commandFactory.createCommand("dom")
+    domTable = dom.execute(table)
+    # Sends the new table to stdout.
+    printCSV(domTable)
+    
+    
