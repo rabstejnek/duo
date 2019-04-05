@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import sys
+import random
 
 
 '''
@@ -12,13 +13,53 @@ class DomCommand:
     Initializes dom command object.
     '''
     def __init__(self):
-        self.sample_size = 100
+        self.sampleSize = 100
+        
+    def numNorm(self,column,value):
+
+        if not (isinstance(value,int) or isinstance(value,float)):
+            return 0.5
+        else:
+            return (value-column.min)/(column.max-column.min)
+
+    def dom(self,row1,row2):
+        s1,s2 = 0,0
+        n = len(table.columns)
+        for i in range(0,n):
+            column = table.columns[i]
+            if isinstance(column,DependentColumn):
+                a0 = row1[i]
+                b0 = row2[i]
+                a = self.numNorm(column,a0)
+                b = self.numNorm(column,b0)
+                s1 = s1 - 10**(column.w * (a-b)/n)
+                s2 = s2 - 10**(column.w * (b-a)/n)
+                
+        return s1/n < s2/n
+
+    def anotherRowIndex(self,index):
+        newIndex = random.randint(0,len(self.table.rows)-1)
+        return newIndex if index != newIndex else self.anotherRowIndex(index)
 
     '''
     Executes dom algorithm on given table.
     '''
     def execute(self,table):
-        # TODO
+        self.table = table
+        n = len(self.table.rows)
+        for i in range(0,n):
+            row1 = self.table.rows[i]
+            row1.append(0)
+            for j in range(0,self.sampleSize):
+                row2Index = self.anotherRowIndex(i)
+                row2 = self.table.rows[row2Index]
+                s = 1/self.sampleSize if self.dom(row1,row2) else 0
+                row1[len(row1)-1] += s
+                
+                
+        # This is done at the end so that it isn't
+        # taken as a dependent row during dom calculation.
+        table.addColumn(">dom")
         return table
 
 '''
@@ -42,7 +83,13 @@ class DependentColumn:
     
     def __init__(self,label,weight):
         self.label = label
-        self.weight = weight
+        self.w = weight
+        
+    def setMax(self,max):
+        self.max = max
+        
+    def setMin(self,min):
+        self.min = min
 
 '''
 An unweighted column not to be used in dom calculation.
@@ -51,7 +98,13 @@ class IndependentColumn:
     
     def __init__(self,label):
         self.label = label
-        self.weight = 0
+        self.w = 0
+        
+    def setMax(self,max):
+        self.max = max
+        
+    def setMin(self,min):
+        self.min = min
 
 '''
 Factory that creates column objects.
@@ -78,29 +131,70 @@ class Table:
         self.columns = list()
         self.rows = list()
         
-    def addColumns(self,labels):
+    def addColumn(self,label):
         columnFactory = ColumnFactory()
-        for label in labels:
-            self.columns.append(columnFactory.createColumn(label))
+        self.columns.append(columnFactory.createColumn(label))
             
     def addRow(self,row):
         self.rows.append(row)
         
+    def generateMinMax(self):
+        n = len(self.columns)
+        for i in range(0,n):
+            min, max = None, None
+            for row in self.rows:
+                if not (isinstance(row[i],int) or isinstance(row[i],float)):
+                    continue
+                if min is None:
+                    min = row[i]
+                if max is None:
+                    max = row[i]
+                if row[i] < min:
+                    min = row[i]
+                if row[i] > max:
+                    max = row[i]
+            self.columns[i].setMax(max)
+            self.columns[i].setMin(min)
+                
     def readCSV(self,input):
         # First read in column labels.
-        self.addColumns(input.readline().rstrip().split(","))
+        tokens = input.readline().rstrip().split(",")
+        for token in tokens:
+            self.addColumn(token)
         # Then read in rows
         for line in input:
-            self.addRow(line.rstrip().split(","))
+            row = line.rstrip().split(",")
+            for i in range(0,len(row)):
+                try:
+                    row[i] = float(row[i]) if '.' in row[i] else int(row[i])
+                except:
+                    pass
+            self.addRow(row)
+        self.generateMinMax()
+            
+    '''
+    Prints table in CSV format.
+    '''
+    def printCSV(self):
+        # print out header
+        nCol = len(self.columns)
+        for i in range(0,nCol-1):
+            print(self.columns[i].label + "," , end="")
+        print(self.columns[nCol-1].label + "\n" , end="")
         
-    
+        # print out rows
+        nRows = len(self.rows)
+        for i in range(0,nRows):
+            nRow = len(self.rows[i])
+            for j in range(0,nRow-1):
+                print("{},".format(self.rows[i][j]) , end="")
+            print("{}\n".format(self.rows[i][nRow-1]) , end="")
+            
         
-'''
-Prints a table in CSV format.
-'''
-def printCSV(table):
-    # print out table in csv format
-    print("")
+        
+
+        
+
 
 
 
@@ -117,8 +211,7 @@ if __name__ == "__main__":
     domTable = dom.execute(table)
     
     # Sends the new table to stdout.
-    printCSV(domTable)
-    
+    domTable.printCSV()
     
     
     
