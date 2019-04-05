@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 
+import sys
+
+
 '''
 Command object for dom algorithm.
 '''
@@ -33,37 +36,65 @@ class CommandFactory:
             return None
 
 '''
-A weighted variable to be used in dom calculation.
+A weighted column to be used in dom calculation.
 '''
-class DependentVariable:
+class DependentColumn:
     
-    def __init__(self, weight):
+    def __init__(self,label,weight):
+        self.label = label
         self.weight = weight
 
 '''
-An unweighted variable not to be used in dom calculation.
+An unweighted column not to be used in dom calculation.
 '''
-class IndependentVariable:
+class IndependentColumn:
     
-    def __init__(self):
+    def __init__(self,label):
+        self.label = label
         self.weight = 0
 
 '''
-Factory that creates variables.
+Factory that creates column objects.
 '''
-class VariableFactory:
+class ColumnFactory:
     
     '''
-    Creates variable based on column name.
+    Creates columns based on name.
     '''
-    def createVariable(self,column):
-        if column.startswith(">"):
-            return DependentVariable(1)
-        elif column.startswith("<"):
-            return DependentVariable(-1)
+    def createColumn(self,label):
+        if label.startswith(">"):
+            return DependentColumn(label,1)
+        elif label.startswith("<"):
+            return DependentColumn(label,-1)
         else:
-            return IndependentVariable()
+            return IndependentColumn(label)
 
+'''
+Table that holds columns and rows.
+'''
+class Table:
+    
+    def __init__(self):
+        self.columns = list()
+        self.rows = list()
+        
+    def addColumns(self,labels):
+        columnFactory = ColumnFactory()
+        for label in labels:
+            self.columns.append(columnFactory.createColumn(label))
+            
+    def addRow(self,row):
+        self.rows.append(row)
+        
+    def readCSV(self,input):
+        # First read in column labels.
+        self.addColumns(input.readline().rstrip().split(","))
+        # Then read in rows
+        for line in input:
+            self.addRow(line.rstrip().split(","))
+        
+    
+        
 '''
 Prints a table in CSV format.
 '''
@@ -75,14 +106,21 @@ def printCSV(table):
 
 
 if __name__ == "__main__":
-    # TODO read in csv into table
-    table = None
+    
+    # Reads csv from stdin into table.
+    table = Table()
+    table.readCSV(sys.stdin)
     
     # Create a dom command and execute it on the table.
     commandFactory = CommandFactory()
     dom = commandFactory.createCommand("dom")
     domTable = dom.execute(table)
+    
     # Sends the new table to stdout.
     printCSV(domTable)
+    
+    
+    
+    
     
     
