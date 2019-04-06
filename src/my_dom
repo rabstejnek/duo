@@ -14,7 +14,10 @@ class DomCommand:
     '''
     def __init__(self):
         self.sampleSize = 100
-        
+    
+    '''
+    Normalizes value based on max and min of given column.
+    '''
     def numNorm(self,column,value):
 
         if not (isinstance(value,int) or isinstance(value,float)):
@@ -22,6 +25,9 @@ class DomCommand:
         else:
             return (value-column.min)/(column.max-column.min)
 
+    '''
+    Determines dom of two rows.
+    '''
     def dom(self,row1,row2):
         s1,s2 = 0,0
         n = len(table.columns)
@@ -37,6 +43,9 @@ class DomCommand:
                 
         return s1/n < s2/n
 
+    '''
+    Finds a row index in the table that differs from the given index.
+    '''
     def anotherRowIndex(self,index):
         newIndex = random.randint(0,len(self.table.rows)-1)
         return newIndex if index != newIndex else self.anotherRowIndex(index)
@@ -55,7 +64,7 @@ class DomCommand:
                 row2 = self.table.rows[row2Index]
                 s = 1/self.sampleSize if self.dom(row1,row2) else 0
                 row1[len(row1)-1] += s
-                
+            row1[len(row1)-1] = round(row1[len(row1)-1],2)
                 
         # This is done at the end so that it isn't
         # taken as a dependent row during dom calculation.
@@ -80,14 +89,23 @@ class CommandFactory:
 A weighted column to be used in dom calculation.
 '''
 class DependentColumn:
-    
+
+    '''
+    Initializes an IndependentColumn object.
+    '''
     def __init__(self,label,weight):
         self.label = label
         self.w = weight
         
+    '''
+    Sets max value of the column.
+    '''
     def setMax(self,max):
         self.max = max
         
+    '''
+    Sets min value of the column.
+    '''
     def setMin(self,min):
         self.min = min
 
@@ -96,13 +114,22 @@ An unweighted column not to be used in dom calculation.
 '''
 class IndependentColumn:
     
+    '''
+    Initializes an IndependentColumn object.
+    '''
     def __init__(self,label):
         self.label = label
         self.w = 0
-        
+    
+    '''
+    Sets max value of the column.
+    '''
     def setMax(self,max):
         self.max = max
-        
+    
+    '''
+    Sets min value of the column.
+    '''
     def setMin(self,min):
         self.min = min
 
@@ -127,17 +154,30 @@ Table that holds columns and rows.
 '''
 class Table:
     
+    '''
+    Initializes a Table object.
+    '''
     def __init__(self):
         self.columns = list()
         self.rows = list()
         
+    '''
+    Adds a Column to the Table.
+    '''
     def addColumn(self,label):
         columnFactory = ColumnFactory()
         self.columns.append(columnFactory.createColumn(label))
-            
+        
+    '''
+    Adds a row to the Table.
+    '''
     def addRow(self,row):
         self.rows.append(row)
-        
+    
+    '''
+    Sets the min and max for every Column based on
+    the rows.
+    '''
     def generateMinMax(self):
         n = len(self.columns)
         for i in range(0,n):
@@ -155,7 +195,11 @@ class Table:
                     max = row[i]
             self.columns[i].setMax(max)
             self.columns[i].setMin(min)
-                
+            
+    '''
+    Reads in CSV from given input and fills out a Table
+    with it.
+    '''
     def readCSV(self,input):
         # First read in column labels.
         tokens = input.readline().rstrip().split(",")
@@ -176,28 +220,33 @@ class Table:
     Prints table in CSV format.
     '''
     def printCSV(self):
-        # print out header
+        iterator = self.csvIterator()
+        for line in iterator:
+            print(line)
+     
+    '''
+    Generator function that acts as an iterator. Generates
+    the table row by row in CSV format.
+    '''
+    def csvIterator(self):
+        
+        header = ""
         nCol = len(self.columns)
         for i in range(0,nCol-1):
-            print(self.columns[i].label + "," , end="")
-        print(self.columns[nCol-1].label + "\n" , end="")
+            header += "{},".format(self.columns[i].label)
+        header += self.columns[nCol-1].label
         
-        # print out rows
+        yield header
+        
         nRows = len(self.rows)
         for i in range(0,nRows):
+            row = ""
             nRow = len(self.rows[i])
             for j in range(0,nRow-1):
-                print("{},".format(self.rows[i][j]) , end="")
-            print("{}\n".format(self.rows[i][nRow-1]) , end="")
+                row += "{},".format(self.rows[i][j])
+            row += "{}".format(self.rows[i][nRow-1])
+            yield row
             
-        
-        
-
-        
-
-
-
-
 
 if __name__ == "__main__":
     
@@ -212,8 +261,4 @@ if __name__ == "__main__":
     
     # Sends the new table to stdout.
     domTable.printCSV()
-    
-    
-    
-    
     
