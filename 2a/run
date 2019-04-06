@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+printf "INPUT:\n\n" > run.out
+cat auto.csv >> run.out
+printf "\n\n" >> run.out
+printf "OUTPUT:\n\n" >> run.out
+cat auto.csv | ./my_dom >> run.out
