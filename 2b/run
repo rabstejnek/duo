@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+javac MonteCarlo.java
+
+printf "OLD:\n\n" > run.out
+old/monte_carlo -n 10 -s 1729 -v True >> run.out 
+printf "\n\n" >> run.out
+printf "OURS:\n\n" >> run.out
+java MonteCarlo 10 1729 True >> run.out
+
+rm -f *.class

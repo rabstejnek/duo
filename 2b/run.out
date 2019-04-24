@@ -1,0 +1,26 @@
+OLD:
+
+{'verbose': True, 'learning_curve': 99.64, 'done_percent': 8.85, 'ep': 4.7, 'productivity_new': 0.46, 'pomposity': 66.72, 'd': 0.18, 'optimism': 29.29, 'atleast': 3.63, 'np': 26.15, 'productivity_exp': 2.87, 'ts': 83.07, 'r': 156.87, 'to': 73.35, 'nprod': 5.05}
+{'verbose': True, 'learning_curve': 61.72, 'done_percent': 3.7, 'ep': 4.19, 'productivity_new': 0.69, 'pomposity': 76.14, 'd': 0.62, 'optimism': 54.92, 'atleast': 4.02, 'np': 2.63, 'productivity_exp': 1.47, 'ts': 88.97, 'r': 605.95, 'to': 94.18, 'nprod': 9.78}
+{'verbose': True, 'learning_curve': 92.28, 'done_percent': 8.95, 'ep': 6.47, 'productivity_new': 0.95, 'pomposity': 96.5, 'd': 0.35, 'optimism': 95.07, 'atleast': 5.67, 'np': 17.65, 'productivity_exp': 9.73, 'ts': 46.39, 'r': 956.72, 'to': 48.51, 'nprod': 4.55}
+{'verbose': True, 'learning_curve': 24.0, 'done_percent': 2.76, 'ep': 2.01, 'productivity_new': 0.21, 'pomposity': 45.75, 'd': 0.95, 'optimism': 46.58, 'atleast': 7.02, 'np': 26.2, 'productivity_exp': 6.82, 'ts': 28.09, 'r': 829.35, 'to': 92.94, 'nprod': 4.54}
+{'verbose': True, 'learning_curve': 33.44, 'done_percent': 0.58, 'ep': 5.65, 'productivity_new': 0.94, 'pomposity': 4.79, 'd': 0.37, 'optimism': 17.49, 'atleast': 5.82, 'np': 21.65, 'productivity_exp': 6.03, 'ts': 45.74, 'r': 176.09, 'to': 72.97, 'nprod': 8.91}
+{'verbose': True, 'learning_curve': 51.28, 'done_percent': 5.1, 'ep': 5.91, 'productivity_new': 0.7, 'pomposity': 66.66, 'd': 0.26, 'optimism': 71.74, 'atleast': 0.99, 'np': 25.42, 'productivity_exp': 7.55, 'ts': 28.79, 'r': 20.41, 'to': 27.54, 'nprod': 7.38}
+{'verbose': True, 'learning_curve': 19.01, 'done_percent': 6.31, 'ep': 3.47, 'productivity_new': 0.19, 'pomposity': 8.9, 'd': 0.47, 'optimism': 68.49, 'atleast': 9.72, 'np': 28.71, 'productivity_exp': 3.67, 'ts': 39.3, 'r': 1.95, 'to': 50.69, 'nprod': 6.93}
+{'verbose': True, 'learning_curve': 12.71, 'done_percent': 7.33, 'ep': 2.62, 'productivity_new': 0.28, 'pomposity': 25.6, 'd': 0.59, 'optimism': 87.38, 'atleast': 8.69, 'np': 24.03, 'productivity_exp': 6.65, 'ts': 93.27, 'r': 347.46, 'to': 71.82, 'nprod': 7.24}
+{'verbose': True, 'learning_curve': 88.68, 'done_percent': 8.63, 'ep': 8.6, 'productivity_new': 0.84, 'pomposity': 68.77, 'd': 0.71, 'optimism': 5.61, 'atleast': 9.34, 'np': 28.31, 'productivity_exp': 9.34, 'ts': 11.48, 'r': 368.6, 'to': 75.48, 'nprod': 8.01}
+{'verbose': True, 'learning_curve': 24.27, 'done_percent': 5.39, 'ep': 6.79, 'productivity_new': 0.67, 'pomposity': 54.48, 'd': 0.91, 'optimism': 68.67, 'atleast': 7.97, 'np': 22.16, 'productivity_exp': 5.22, 'ts': 83.22, 'r': 931.01, 'to': 12.16, 'nprod': 6.66}
+
+
+OURS:
+
+{'pomposity': 59.90, 'learning_curve': 97.96, 'optimism': 68.58, 'atleast': 8.49, 'done_percent': 9.18, 'productivity_new': 0.51, 'productivity_exp': 5.85, 'd': 0.73, 'ep': 1.55, 'nprod': 8.05, 'np': 9.86, 'ts': 16.59, 'to': 35.49, 'r': 844.01, 'verbose': True}
+{'pomposity': 1.86, 'learning_curve': 28.20, 'optimism': 21.25, 'atleast': 6.73, 'done_percent': 4.00, 'productivity_new': 0.14, 'productivity_exp': 3.83, 'd': 0.89, 'ep': 9.41, 'nprod': 3.84, 'np': 25.01, 'ts': 35.93, 'to': 29.14, 'r': 308.80, 'verbose': True}
+{'pomposity': 90.92, 'learning_curve': 57.41, 'optimism': 75.37, 'atleast': 7.64, 'done_percent': 2.12, 'productivity_new': 0.40, 'productivity_exp': 8.21, 'd': 0.40, 'ep': 2.91, 'nprod': 6.42, 'np': 14.35, 'ts': 55.95, 'to': 23.67, 'r': 61.48, 'verbose': True}
+{'pomposity': 11.62, 'learning_curve': 98.53, 'optimism': 31.17, 'atleast': 2.66, 'done_percent': 2.84, 'productivity_new': 0.04, 'productivity_exp': 5.81, 'd': 0.45, 'ep': 9.28, 'nprod': 8.04, 'np': 26.44, 'ts': 89.71, 'to': 33.08, 'r': 719.00, 'verbose': True}
+{'pomposity': 53.19, 'learning_curve': 43.23, 'optimism': 85.35, 'atleast': 2.38, 'done_percent': 4.34, 'productivity_new': 0.66, 'productivity_exp': 5.96, 'd': 0.57, 'ep': 8.22, 'nprod': 1.27, 'np': 8.11, 'ts': 50.90, 'to': 71.55, 'r': 712.80, 'verbose': True}
+{'pomposity': 86.46, 'learning_curve': 85.43, 'optimism': 5.26, 'atleast': 0.25, 'done_percent': 4.95, 'productivity_new': 0.40, 'productivity_exp': 7.75, 'd': 0.22, 'ep': 2.75, 'nprod': 9.01, 'np': 24.87, 'ts': 8.31, 'to': 68.63, 'r': 788.23, 'verbose': True}
+{'pomposity': 60.46, 'learning_curve': 84.98, 'optimism': 82.47, 'atleast': 5.89, 'done_percent': 5.13, 'productivity_new': 0.15, 'productivity_exp': 3.06, 'd': 0.11, 'ep': 8.70, 'nprod': 0.47, 'np': 13.04, 'ts': 57.00, 'to': 44.93, 'r': 894.77, 'verbose': True}
+{'pomposity': 70.26, 'learning_curve': 62.25, 'optimism': 26.26, 'atleast': 3.61, 'done_percent': 4.25, 'productivity_new': 0.41, 'productivity_exp': 1.23, 'd': 0.86, 'ep': 1.85, 'nprod': 0.81, 'np': 7.94, 'ts': 75.27, 'to': 88.52, 'r': 219.11, 'verbose': True}
+{'pomposity': 26.99, 'learning_curve': 25.54, 'optimism': 14.84, 'atleast': 1.72, 'done_percent': 0.41, 'productivity_new': 0.46, 'productivity_exp': 7.65, 'd': 0.41, 'ep': 2.56, 'nprod': 9.04, 'np': 17.61, 'ts': 95.29, 'to': 79.27, 'r': 944.86, 'verbose': True}
+{'pomposity': 20.75, 'learning_curve': 66.23, 'optimism': 74.96, 'atleast': 2.09, 'done_percent': 2.29, 'productivity_new': 0.82, 'productivity_exp': 7.85, 'd': 0.12, 'ep': 8.83, 'nprod': 2.21, 'np': 21.75, 'ts': 8.43, 'to': 61.14, 'r': 77.76, 'verbose': True}
